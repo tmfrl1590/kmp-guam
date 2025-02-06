@@ -37,6 +37,9 @@ kotlin {
             implementation(libs.ktor.client.okhttp)
         }
         commonMain.dependencies {
+            implementation(projects.core.presentation)
+            implementation(projects.presentation)
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -69,13 +72,17 @@ kotlin {
             implementation(libs.koin.compose)
             implementation(libs.koin.compose.viewmodel)
 
+            // coroutine
             implementation(libs.kotlinx.coroutines)
 
             // navigation
             implementation(libs.jetbrains.compose.navigation)
 
             // kotlinx-datetime
-            implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+            implementation(libs.kotlinx.datetime)
+
+            //implementation("org.jetbrains.compose.runtime:runtime:1.5.14")
+
         }
 
         iosMain.dependencies {
