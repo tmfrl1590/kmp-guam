@@ -31,5 +31,5 @@ object PartyMapper {
 }
 
 fun convertToImageUrl(image: String?): String{
-    return "https://partyguham.com/dev/$image"
+    return "https://partyguham.com/dev/api/$image"
 }
