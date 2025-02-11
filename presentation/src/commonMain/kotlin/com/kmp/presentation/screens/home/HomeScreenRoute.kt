@@ -10,38 +10,51 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.kmp.core.presentation.PartyListItem1
 import com.kmp.core.presentation.WHITE
+import com.kmp.core.presentation.homeTopTabList
 import com.kmp.presentation.screens.home.component.HomeTopBar
+import com.kmp.presentation.screens.home.component.HomeTopTabArea
+import com.kmp.presentation.screens.home.tab_main.MainArea
+import com.kmp.presentation.screens.home.viewmodel.HomeViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
 fun HomeScreenRoute(
     homeViewModel: HomeViewModel = koinViewModel(),
 ) {
-    val state by homeViewModel.state.collectAsStateWithLifecycle()
+    val homeState by homeViewModel.state.collectAsStateWithLifecycle()
 
     LaunchedEffect(key1 = Unit) {
         homeViewModel.getPartyList(page = 1, limit = 50, sort = "createdAt", order = "DESC", partyTypes = listOf(1), titleSearch = null, status = null)
+        homeViewModel.getRecruitmentList(page = 1, limit = 50, sort = "createdAt", order = "DESC", titleSearch = null, partyTypes = null, position = null)
     }
 
     HomeScreen(
-        state = state,
-        onGotoSearch = {}
+        homeState = homeState,
+        onGotoSearch = {},
+        onGotoRecruitmentDetail = { _, _ ->},
+        onGotoPartyDetail = {},
+        onAction = { action ->
+            when(action){
+                is HomeAction.OnTabClick -> { homeViewModel.onAction(action) }
+            }
+        }
     )
 }
 
 @Composable
 private fun HomeScreen(
-    state: HomeState,
+    homeState: HomeState,
     onGotoSearch: () -> Unit,
+    onGotoRecruitmentDetail: (Int, Int) -> Unit,
+    onGotoPartyDetail: (Int) -> Unit,
+    onAction: (HomeAction) -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -65,26 +78,34 @@ private fun HomeScreen(
                     onGoToAlarm = {}
                 )
 
-                LazyRow(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
-                    itemsIndexed(
-                        items = state.partyList.parties,
-                        key = { index, _ ->
-                            index
-                        }
-                    ) { _, item ->
-                        PartyListItem1(
-                            imageUrl = item.image,
-                            type = item.partyType.type,
-                            title = item.title,
-                            recruitmentCount = item.recruitmentCount,
-                            onClick = {}
+                HomeTopTabArea(
+                    homeTopTabList = homeTopTabList,
+                    selectedTabText = homeState.selectedTabText,
+                    onTabClick = { selectedTabText -> onAction(HomeAction.OnTabClick(tabText = selectedTabText)) }
+                )
+
+                when (homeState.selectedTabText) {
+                    homeTopTabList[0] -> {
+                        MainArea(
+                            homeState = homeState,
+                            onReload = {  },
+                            onGoRecruitment = { onAction(HomeAction.OnTabClick(tabText = homeTopTabList[2])) },
+                            onGoParty = { onAction(HomeAction.OnTabClick(tabText = homeTopTabList[1])) },
+                            onGotoRecruitmentDetail = onGotoRecruitmentDetail,
+                            onGotoPartyDetail = onGotoPartyDetail
                         )
                     }
+
+                    homeTopTabList[1] -> {
+
+                    }
+
+                    homeTopTabList[2] -> {
+
+                    }
                 }
+
+
             }
         }
     }

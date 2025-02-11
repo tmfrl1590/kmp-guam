@@ -6,7 +6,8 @@ import com.kmp.data.network.PartyRemoteSourceImpl
 import com.kmp.data.repository.PartyRepositoryImpl
 import com.kmp.domain.repository.PartyRepository
 import com.kmp.domain.usecase.party.GetPartyListUseCase
-import com.kmp.presentation.screens.home.HomeViewModel
+import com.kmp.domain.usecase.party.GetRecruitmentListUseCase
+import com.kmp.presentation.screens.home.viewmodel.HomeViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
@@ -25,6 +26,7 @@ val viewModelModule = module {
 
 val useCaseModule = module {
     factory { GetPartyListUseCase(get()) }
+    factory { GetRecruitmentListUseCase(get()) }
 }
 
 val repositoryModule = module {
