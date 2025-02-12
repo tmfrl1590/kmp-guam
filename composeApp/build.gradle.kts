@@ -10,8 +10,6 @@ plugins {
 }
 
 kotlin {
-    tasks.create("testClasses")
-
     androidTarget {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
