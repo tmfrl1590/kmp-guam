@@ -91,11 +91,11 @@ kotlin {
 }
 
 android {
-    namespace = "com.kmp.guam"
+    namespace = "com.party.guam"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        applicationId = "com.kmp.guam"
+        applicationId = "com.party.guam"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
