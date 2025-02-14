@@ -1,4 +1,4 @@
-package com.party.data.network
+package com.party.data.network.party
 
 import com.party.core.domain.DataError
 import com.party.core.domain.Result
@@ -15,8 +15,8 @@ interface PartyRemoteSource {
         sort: String,
         order: String,
         titleSearch: String?,
-        partyTypes: List<Int>?,
-        position: List<Int>?
+        partyTypes: List<Int>,
+        position: List<Int>
     ): Result<RecruitmentListDto, DataError.Remote>
 
     // 파티 리스트 조회

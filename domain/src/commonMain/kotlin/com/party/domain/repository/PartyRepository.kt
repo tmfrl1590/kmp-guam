@@ -14,8 +14,8 @@ interface PartyRepository {
         sort: String,
         order: String,
         titleSearch: String?,
-        partyTypes: List<Int>?,
-        position: List<Int>?
+        partyTypes: List<Int>,
+        position: List<Int>
     ): Result<RecruitmentList, DataError.Remote>
 
     // 파티 리스트 조회

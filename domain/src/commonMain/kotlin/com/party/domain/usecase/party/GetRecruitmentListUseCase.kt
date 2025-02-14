@@ -14,8 +14,8 @@ class GetRecruitmentListUseCase(
         sort: String,
         order: String,
         titleSearch: String?,
-        partyTypes: List<Int>?,
-        position: List<Int>?,
+        partyTypes: List<Int>,
+        position: List<Int>,
     ): Result<RecruitmentList, DataError.Remote> {
         return partyRepository.getRecruitmentList(
             page = page,

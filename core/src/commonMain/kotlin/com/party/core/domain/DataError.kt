@@ -8,7 +8,8 @@ sealed interface DataError: Error {
         NO_INTERNET,
         SERVER,
         SERIALIZATION,
-        UNKNOWN
+        UNKNOWN,
+        BAD_REQUEST,
     }
 
     enum class Local: DataError {

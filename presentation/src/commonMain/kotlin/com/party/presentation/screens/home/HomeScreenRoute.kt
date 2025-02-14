@@ -24,6 +24,7 @@ import com.party.presentation.screens.home.component.HomeTopBar
 import com.party.presentation.screens.home.component.HomeTopTabArea
 import com.party.presentation.screens.home.tab_main.MainArea
 import com.party.presentation.screens.home.tab_party.PartyArea
+import com.party.presentation.screens.home.tab_recruitment.RecruitmentArea
 import com.party.presentation.screens.home.viewmodel.HomeViewModel
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -39,7 +40,7 @@ fun HomeScreenRoute(
 
     LaunchedEffect(key1 = Unit) {
         homeViewModel.getPartyList(page = 1, limit = 50, sort = "createdAt", order = "DESC", partyTypes = emptyList(), titleSearch = null, status = null)
-        homeViewModel.getRecruitmentList(page = 1, limit = 50, sort = "createdAt", order = "DESC", titleSearch = null, partyTypes = null, position = null)
+        homeViewModel.getRecruitmentList(page = 1, limit = 50, sort = "createdAt", order = "DESC", titleSearch = null, partyTypes = emptyList(), position = emptyList())
     }
 
     HomeScreen(
@@ -143,7 +144,23 @@ private fun HomeScreen(
                     }
 
                     homeTopTabList[2] -> {
-
+                        RecruitmentArea(
+                            listState = listState,
+                            homeState = homeState,
+                            onRecruitmentItemClick = { _, _ ->},
+                            onPositionSheetClick = { isOpen -> onAction(HomeAction.OnPositionSheetOpen(isOpen)) },
+                            onPartyTypeFilterClick = { isOpen -> onAction(HomeAction.OnPartyTypeSheetOpenRecruitment(isOpen)) },
+                            onChangeOrderBy = { selectedPartyType -> onAction(HomeAction.OnDescRecruitment(selectedPartyType)) },
+                            onMainPositionClick = { selectedMainPosition -> onAction(HomeAction.OnMainPositionClick(selectedMainPosition)) },
+                            onSubPositionClick = { selectedSubPosition -> onAction(HomeAction.OnSubPositionClick(selectedSubPosition)) },
+                            onDelete = { position -> onAction(HomeAction.OnDelete(position)) },
+                            onPositionSheetReset = { onAction(HomeAction.OnPositionSheetReset) },
+                            onPositionApply = { onAction(HomeAction.OnPositionApply) },
+                            onPositionSheetClose = { isOpen -> onAction(HomeAction.OnPositionSheetOpen(isOpen)) },
+                            onPartyTypeSheetClick = { selectedPartyType -> onAction(HomeAction.OnSelectedPartyTypeRecruitment(selectedPartyType)) },
+                            onPartyTypeSheetApply = { onAction(HomeAction.OnPartyTypeApplyRecruitment) },
+                            onPartyTypeSheetReset = { onAction(HomeAction.OnSelectedPartyTypeResetRecruitmentReset) },
+                        )
                     }
                 }
 

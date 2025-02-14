@@ -8,6 +8,7 @@ import io.ktor.client.network.sockets.SocketTimeoutException
 import io.ktor.client.statement.HttpResponse
 import io.ktor.util.network.UnresolvedAddressException
 import kotlinx.coroutines.ensureActive
+import kotlinx.io.IOException
 import kotlin.coroutines.coroutineContext
 
 suspend inline fun <reified T> safeCall(
@@ -17,7 +18,7 @@ suspend inline fun <reified T> safeCall(
         execute()
     } catch(e: SocketTimeoutException) {
         return Result.Error(DataError.Remote.REQUEST_TIMEOUT)
-    } catch(e: UnresolvedAddressException) {
+    } catch(e: IOException) {
         return Result.Error(DataError.Remote.NO_INTERNET)
     } catch (e: Exception) {
         coroutineContext.ensureActive()
@@ -38,6 +39,7 @@ suspend inline fun <reified T> responseToResult(
                 Result.Error(DataError.Remote.SERIALIZATION)
             }
         }
+        400 -> Result.Error(DataError.Remote.BAD_REQUEST)
         408 -> Result.Error(DataError.Remote.REQUEST_TIMEOUT)
         429 -> Result.Error(DataError.Remote.TOO_MANY_REQUESTS)
         in 500..599 -> Result.Error(DataError.Remote.SERVER)

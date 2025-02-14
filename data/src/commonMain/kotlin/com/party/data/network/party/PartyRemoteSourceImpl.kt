@@ -1,4 +1,4 @@
-package com.party.data.network
+package com.party.data.network.party
 
 import com.party.core.data.safeCall
 import com.party.core.domain.DataError
@@ -18,8 +18,8 @@ class PartyRemoteSourceImpl(
         sort: String,
         order: String,
         titleSearch: String?,
-        partyTypes: List<Int>?,
-        position: List<Int>?
+        partyTypes: List<Int>,
+        position: List<Int>,
     ): Result<RecruitmentListDto, DataError.Remote> {
         return safeCall<RecruitmentListDto> {
             httpClient.get(
@@ -29,9 +29,13 @@ class PartyRemoteSourceImpl(
                 parameter("limit", limit)
                 parameter("sort", sort)
                 parameter("order", order)
+                if (partyTypes.isNotEmpty()) {
+                    partyTypes.forEach { parameter("partyType", it) }
+                }
                 titleSearch?.let { parameter("titleSearch", it) }
-                partyTypes?.let { parameter("partyTypes", it)  }
-                position?.let { parameter("position", position) }
+                if(position.isNotEmpty()){
+                    position.forEach { parameter("position", it) }
+                }
             }
         }
     }
@@ -53,7 +57,6 @@ class PartyRemoteSourceImpl(
                 parameter("limit", limit)
                 parameter("sort", sort)
                 parameter("order", order)
-                //parameter("partyTypes", partyTypes)
                 if (partyTypes.isNotEmpty()) {
                     partyTypes.forEach { parameter("partyType", it) }
                 }

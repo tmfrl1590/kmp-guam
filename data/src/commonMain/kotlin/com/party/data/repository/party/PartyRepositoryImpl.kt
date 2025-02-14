@@ -1,10 +1,10 @@
-package com.party.data.repository
+package com.party.data.repository.party
 
 import com.party.core.domain.DataError
 import com.party.core.domain.Result
 import com.party.core.domain.map
 import com.party.data.mapper.PartyMapper
-import com.party.data.network.PartyRemoteSource
+import com.party.data.network.party.PartyRemoteSource
 import com.party.domain.model.party.PartyList
 import com.party.domain.model.party.RecruitmentList
 import com.party.domain.repository.PartyRepository
@@ -18,8 +18,8 @@ class PartyRepositoryImpl(
         sort: String,
         order: String,
         titleSearch: String?,
-        partyTypes: List<Int>?,
-        position: List<Int>?
+        partyTypes: List<Int>,
+        position: List<Int>
     ): Result<RecruitmentList, DataError.Remote> {
         return partyRemoteSource.getRecruitmentList(
             page = page,
