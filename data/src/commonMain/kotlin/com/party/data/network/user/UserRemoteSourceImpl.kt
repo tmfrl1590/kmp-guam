@@ -1,5 +1,6 @@
 package com.party.data.network.user
 
+import com.party.core.Constants.serverUrl
 import com.party.core.data.safeCall
 import com.party.core.domain.DataError
 import com.party.core.domain.Result
@@ -16,7 +17,7 @@ class UserRemoteSourceImpl(
     ): Result<List<PositionListDto>, DataError.Remote> {
         return safeCall<List<PositionListDto>> {
             httpClient.get(
-                urlString = "https://partyguham.com/dev/api/positions"
+                urlString = serverUrl("/positions")
             ){
                 parameter("main", main)
             }

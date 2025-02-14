@@ -1,5 +1,6 @@
 package com.party.data.mapper
 
+import com.party.core.Constants.imageUrl
 import com.party.data.dto.party.PartyListDto
 import com.party.data.dto.party.RecruitmentListDto
 import com.party.domain.model.party.PartyItem
@@ -25,7 +26,7 @@ object PartyMapper {
                     ),
                     title = it.title,
                     content = it.content,
-                    image = convertToImageUrl(it.image),
+                    image = imageUrl(it.image),
                     status = it.status,
                     createdAt = it.createdAt,
                     updatedAt = it.updatedAt,
@@ -48,7 +49,7 @@ object PartyMapper {
                     party = RecruitmentParty(
                         id = it.party.id,
                         title = it.party.title,
-                        image = convertToImageUrl(it.party.image),
+                        image = imageUrl(it.party.image),
                         partyType = RecruitmentPartyType(
                             id = it.party.partyType.id,
                             type = it.party.partyType.type
@@ -63,8 +64,4 @@ object PartyMapper {
             }
         )
     }
-}
-
-fun convertToImageUrl(image: String?): String{
-    return "https://partyguham.com/dev/api/$image"
 }

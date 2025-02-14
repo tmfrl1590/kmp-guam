@@ -1,5 +1,6 @@
 package com.party.data.network.party
 
+import com.party.core.Constants.serverUrl
 import com.party.core.data.safeCall
 import com.party.core.domain.DataError
 import com.party.core.domain.Result
@@ -23,7 +24,7 @@ class PartyRemoteSourceImpl(
     ): Result<RecruitmentListDto, DataError.Remote> {
         return safeCall<RecruitmentListDto> {
             httpClient.get(
-                urlString = "https://partyguham.com/dev/api/parties/recruitments"
+                urlString = serverUrl("/parties/recruitments")
             ){
                 parameter("page", page)
                 parameter("limit", limit)
@@ -51,7 +52,7 @@ class PartyRemoteSourceImpl(
     ): Result<PartyListDto, DataError.Remote> {
         return safeCall<PartyListDto> {
             httpClient.get(
-                urlString = "https://partyguham.com/dev/api/parties"
+                urlString = serverUrl("/parties")
             ){
                 parameter("page", page)
                 parameter("limit", limit)
@@ -60,8 +61,6 @@ class PartyRemoteSourceImpl(
                 if (partyTypes.isNotEmpty()) {
                     partyTypes.forEach { parameter("partyType", it) }
                 }
-
-
                 titleSearch?.let { parameter("titleSearch", it) }
                 status?.let { parameter("status", it) }
             }
