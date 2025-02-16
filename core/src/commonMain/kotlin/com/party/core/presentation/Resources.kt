@@ -13,8 +13,11 @@ import kmp_guam.core.generated.resources.icon_arrow_down
 import kmp_guam.core.generated.resources.icon_arrow_right
 import kmp_guam.core.generated.resources.icon_checked
 import kmp_guam.core.generated.resources.icon_close2
+import kmp_guam.core.generated.resources.icon_home
 import kmp_guam.core.generated.resources.icon_info
+import kmp_guam.core.generated.resources.icon_profile
 import kmp_guam.core.generated.resources.icon_search
+import kmp_guam.core.generated.resources.icon_state
 import kmp_guam.core.generated.resources.icon_toggle_off
 import kmp_guam.core.generated.resources.icon_toggle_on
 import kmp_guam.core.generated.resources.icon_unchecked
@@ -49,5 +52,8 @@ object Resources {
         val Icon_Checked = Res.drawable.icon_checked
         val Icon_UnChecked = Res.drawable.icon_unchecked
         val Icon_Close2 = Res.drawable.icon_close2
+        val Icon_Home = Res.drawable.icon_home
+        val Icon_State = Res.drawable.icon_state
+        val Icon_Profile = Res.drawable.icon_profile
     }
 }

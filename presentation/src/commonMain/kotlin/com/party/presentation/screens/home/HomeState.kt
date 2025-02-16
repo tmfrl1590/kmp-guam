@@ -8,6 +8,10 @@ import com.party.domain.model.user.detail.PositionList
 
 data class HomeState(
 
+    var isScrollParty: Boolean = false,
+    var isScrollRecruitment: Boolean = false,
+    val isExpandedFloating: Boolean = false,
+
     // 메인 / 파티 / 모집공고 탭
     val selectedTabText: String = homeTopTabList[0],
 

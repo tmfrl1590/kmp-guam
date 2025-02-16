@@ -17,9 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
+import com.party.core.presentation.BottomNavigationBar
 import com.party.core.presentation.WHITE
 import com.party.core.presentation.homeTopTabList
-import com.party.presentation.navigation.Screens
 import com.party.presentation.screens.home.component.HomeTopBar
 import com.party.presentation.screens.home.component.HomeTopTabArea
 import com.party.presentation.screens.home.tab_main.MainArea
@@ -95,7 +95,11 @@ private fun HomeScreen(
     ) {
         Scaffold(
             bottomBar = {
-
+                BottomNavigationBar(
+                    //context = context,
+                    navController = navController,
+                    isExpandedFloatingButton = homeState.isExpandedFloating,
+                )
             }
         ){
             Column(

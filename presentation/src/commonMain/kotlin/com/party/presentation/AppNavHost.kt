@@ -10,8 +10,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.party.presentation.navigation.Screens
+import com.party.core.Screens
 import com.party.presentation.screens.home.HomeScreenRoute
+import com.party.presentation.screens.profile.ProfileScreenRoute
+import com.party.presentation.screens.state.StateScreenRoute
 
 const val ANIMATION_DURATION = 500
 
@@ -53,6 +55,16 @@ fun AppNavHost() {
     ){
         composable<Screens.Home> {
             HomeScreenRoute(
+                navController = navController
+            )
+        }
+        composable<Screens.State> {
+            StateScreenRoute(
+                navController = navController
+            )
+        }
+        composable<Screens.Profile> {
+            ProfileScreenRoute(
                 navController = navController
             )
         }
