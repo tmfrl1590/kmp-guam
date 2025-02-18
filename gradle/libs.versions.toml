@@ -23,6 +23,7 @@ koin = "4.0.0"
 ktor = "3.0.0"
 
 landscapist = "2.4.2"
+foundationLayoutAndroid = "1.7.8"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -58,6 +59,7 @@ ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "k
 
 # Coil
 coil3 = { module = "com.github.skydoves:landscapist-coil3", version.ref = "landscapist" }
+androidx-foundation-layout-android = { group = "androidx.compose.foundation", name = "foundation-layout-android", version.ref = "foundationLayoutAndroid" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

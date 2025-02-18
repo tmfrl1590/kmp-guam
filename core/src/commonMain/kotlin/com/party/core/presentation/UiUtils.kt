@@ -13,11 +13,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun TextComponent(
@@ -76,6 +78,51 @@ fun LoadingProgressBar() {
     ) {
         CircularProgressIndicator(
             color = Color.Gray,
+        )
+    }
+}
+
+@Composable
+fun ScreenExplainArea(
+    mainExplain: String,
+    subExplain: String,
+) {
+    HeightSpacer(heightDp = 32.dp)
+
+    TextComponent(
+        text = mainExplain,
+        fontWeight = FontWeight.Bold,
+        fontSize = T2,
+    )
+
+    HeightSpacer(heightDp = 12.dp)
+
+    TextComponent(
+        text = subExplain,
+        fontSize = T3,
+    )
+}
+
+@Composable
+fun AnnotatedTextComponent(
+    modifier: Modifier = Modifier,
+    annotatedString: AnnotatedString,
+    textColor: Color = Color.Black,
+    textAlign: Alignment = Alignment.CenterStart,
+    fontWeight: FontWeight = FontWeight.Normal,
+    fontSize: TextUnit,
+    textDecoration: TextDecoration? = null,
+) {
+    Box(
+        modifier = modifier,
+        contentAlignment = textAlign,
+    ){
+        Text(
+            text = annotatedString,
+            color = textColor,
+            fontWeight = fontWeight,
+            fontSize = fontSize,
+            textDecoration = textDecoration,
         )
     }
 }

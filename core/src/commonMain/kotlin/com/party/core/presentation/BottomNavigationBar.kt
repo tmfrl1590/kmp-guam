@@ -179,7 +179,7 @@ private fun bottomIconSetting(screens: Screens): Painter {
         Screens.Home -> painterResource(Resources.Icon.Icon_Home)
         Screens.State -> painterResource(Resources.Icon.Icon_State)
         Screens.Profile -> painterResource(Resources.Icon.Icon_Profile)
-        //else -> painterResource(Resources.Icon.Icon_Home)
+        else -> painterResource(Resources.Icon.Icon_Home)
     }
 }
 
@@ -189,7 +189,7 @@ private fun bottomLabelSetting(screens: Screens): String {
         Screens.Home -> "홈"
         Screens.State -> "활동"
         Screens.Profile -> "프로필"
-        //else -> ""
+        else -> ""
     }
 }
 

@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.party.core.Screens
 import com.party.presentation.screens.home.HomeScreenRoute
+import com.party.presentation.screens.login.LoginScreenRoute
 import com.party.presentation.screens.profile.ProfileScreenRoute
 import com.party.presentation.screens.state.StateScreenRoute
 
@@ -24,7 +25,7 @@ fun AppNavHost() {
 
     NavHost(
         navController = navController,
-        startDestination = Screens.Home,
+        startDestination = Screens.Login,
         modifier = Modifier
             .fillMaxSize(),
         enterTransition = {
@@ -53,6 +54,12 @@ fun AppNavHost() {
             )
         },
     ){
+        composable<Screens.Login> {
+            LoginScreenRoute(
+                navController = navController,
+                snackBarHostState = snackBarHostState
+            )
+        }
         composable<Screens.Home> {
             HomeScreenRoute(
                 navController = navController
