@@ -17,10 +17,13 @@ suspend inline fun <reified T> safeCall(
     val response = try {
         execute()
     } catch(e: SocketTimeoutException) {
+        e.printStackTrace()
         return Result.Error(DataError.Remote.REQUEST_TIMEOUT)
     } catch(e: IOException) {
+        e.printStackTrace()
         return Result.Error(DataError.Remote.NO_INTERNET)
     } catch (e: Exception) {
+        e.printStackTrace()
         coroutineContext.ensureActive()
         return Result.Error(DataError.Remote.UNKNOWN)
     }
@@ -40,6 +43,7 @@ suspend inline fun <reified T> responseToResult(
             }
         }
         400 -> Result.Error(DataError.Remote.BAD_REQUEST)
+        401 -> Result.Error(DataError.Remote.UNAUTHORIZED)
         408 -> Result.Error(DataError.Remote.REQUEST_TIMEOUT)
         429 -> Result.Error(DataError.Remote.TOO_MANY_REQUESTS)
         in 500..599 -> Result.Error(DataError.Remote.SERVER)

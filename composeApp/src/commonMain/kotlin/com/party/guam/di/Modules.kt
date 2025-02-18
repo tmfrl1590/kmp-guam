@@ -12,7 +12,9 @@ import com.party.domain.repository.UserRepository
 import com.party.domain.usecase.party.GetPartyListUseCase
 import com.party.domain.usecase.party.GetRecruitmentListUseCase
 import com.party.domain.usecase.user.GetPositionsUseCase
+import com.party.domain.usecase.user.GoogleLoginUseCase
 import com.party.presentation.screens.home.viewmodel.HomeViewModel
+import com.party.presentation.screens.login.LoginViewModel
 import org.koin.core.module.Module
 import org.koin.core.module.dsl.singleOf
 import org.koin.core.module.dsl.viewModelOf
@@ -27,12 +29,14 @@ val sharedModule = module {
 
 val viewModelModule = module {
     viewModelOf(::HomeViewModel)
+    viewModelOf(::LoginViewModel)
 }
 
 val useCaseModule = module {
     factory { GetPartyListUseCase(get()) }
     factory { GetRecruitmentListUseCase(get()) }
     factory { GetPositionsUseCase(get()) }
+    factory { GoogleLoginUseCase(get()) }
 }
 
 val repositoryModule = module {

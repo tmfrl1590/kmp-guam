@@ -14,6 +14,11 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,6 +26,9 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.mmk.kmpauth.google.GoogleAuthCredentials
+import com.mmk.kmpauth.google.GoogleAuthProvider
+import com.mmk.kmpauth.google.GoogleButtonUiContainer
 import com.party.core.presentation.EXTRA_LARGE_BUTTON_HEIGHT2
 import com.party.core.presentation.GRAY200
 import com.party.core.presentation.HeightSpacer
@@ -34,8 +42,20 @@ import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
-fun LoginButtonArea() {
-    SocialLoginButton(
+fun LoginButtonArea(
+    onGoogleLoginSuccess: (String) -> Unit,
+) {
+    var authReady by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) {
+        GoogleAuthProvider.create(
+            credentials = GoogleAuthCredentials(
+                serverId = "697659482179-ish7bgg19g5le6b1urrss97tjgasi91f.apps.googleusercontent.com"
+            )
+        )
+        authReady = true
+    }
+
+    /*SocialLoginButton(
         text = stringResource(Resources.String.Login3),
         containerColor = KakaoLoginColor,
         borderColor = KakaoLoginColor,
@@ -43,26 +63,38 @@ fun LoginButtonArea() {
         contentDescription = "kakao",
         onClick = {
         }
-    )
+    )*/
 
-    HeightSpacer(heightDp = 8.dp)
+    //HeightSpacer(heightDp = 8.dp)
 
-    SocialLoginButton(
-        text = stringResource(Resources.String.Login4),
-        containerColor = WHITE,
-        borderColor = GRAY200,
-        painterImage = painterResource(Resources.Icon.Icon_google),
-        contentDescription = "google",
-        onClick = {
-
+    if(authReady){
+        GoogleButtonUiContainer(
+            onGoogleSignInResult = { googleUser ->
+                val tokenId = googleUser?.idToken ?: ""
+                val email = googleUser?.email ?: ""
+                println("TOKEN: $tokenId")
+                println("TOKEN: $email")
+                onGoogleLoginSuccess(tokenId)
+            }
+        ){
+            SocialLoginButton(
+                text = stringResource(Resources.String.Login4),
+                containerColor = WHITE,
+                borderColor = GRAY200,
+                painterImage = painterResource(Resources.Icon.Icon_google),
+                contentDescription = "google",
+                onClick = {
+                    this.onClick()
+                }
+            )
         }
-    )
+    }
 
     HeightSpacer(heightDp = 24.dp)
 }
 
 @Composable
-fun SocialLoginButton(
+private fun SocialLoginButton(
     text: String,
     containerColor: Color,
     borderColor: Color,
