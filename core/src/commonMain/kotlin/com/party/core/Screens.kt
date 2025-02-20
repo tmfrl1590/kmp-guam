@@ -11,4 +11,6 @@ sealed interface Screens {
     data object State: Screens
     @Serializable
     data object Profile: Screens
+    @Serializable
+    data class JoinEmail(val userEmail: String, val signupAccessToken: String): Screens
 }

@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -20,6 +21,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun TextComponent(
@@ -124,5 +129,19 @@ fun AnnotatedTextComponent(
             fontSize = fontSize,
             textDecoration = textDecoration,
         )
+    }
+}
+
+fun snackBarMessage(
+    snackBarHostState: SnackbarHostState,
+    message: String,
+    durationTime: Long = 2000L
+) {
+    CoroutineScope(Dispatchers.Main).launch {
+        val job = launch {
+            snackBarHostState.showSnackbar(message)
+        }
+        delay(durationTime)
+        job.cancel()
     }
 }

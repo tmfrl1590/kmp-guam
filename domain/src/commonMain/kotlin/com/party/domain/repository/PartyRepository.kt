@@ -1,6 +1,7 @@
 package com.party.domain.repository
 
 import com.party.core.domain.DataError
+import com.party.core.domain.DataErrorRemote
 import com.party.core.domain.Result
 import com.party.domain.model.party.PartyList
 import com.party.domain.model.party.RecruitmentList
@@ -16,7 +17,7 @@ interface PartyRepository {
         titleSearch: String?,
         partyTypes: List<Int>,
         position: List<Int>
-    ): Result<RecruitmentList, DataError.Remote>
+    ): Result<RecruitmentList, DataErrorRemote<Unit>>
 
     // 파티 리스트 조회
     suspend fun getPartyList(
@@ -27,5 +28,5 @@ interface PartyRepository {
         partyTypes: List<Int>,
         titleSearch: String?,
         status: String?
-    ): Result<PartyList, DataError.Remote>
+    ): Result<PartyList, DataErrorRemote<Unit>>
 }

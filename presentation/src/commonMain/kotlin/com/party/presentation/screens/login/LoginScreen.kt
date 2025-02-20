@@ -8,8 +8,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 import com.party.core.Screens
 import com.party.core.presentation.HeightSpacer
@@ -17,6 +19,7 @@ import com.party.core.presentation.MEDIUM_PADDING_SIZE
 import com.party.core.presentation.Resources
 import com.party.core.presentation.ScreenExplainArea
 import com.party.core.presentation.WHITE
+import com.party.core.presentation.snackBarMessage
 import com.party.presentation.screens.login.component.LoginButtonArea
 import com.party.presentation.screens.login.component.LoginScaffoldArea
 import com.party.presentation.screens.login.component.LoginScreenBottomArea
@@ -31,11 +34,26 @@ fun LoginScreenRoute(
     loginViewModel: LoginViewModel = koinViewModel()
 ) {
     LaunchedEffect(key1 = Unit) {
+        loginViewModel.nextScreen.collectLatest {
+            snackBarMessage(snackBarHostState, it.message)
+
+            navController.navigate(
+                Screens.JoinEmail(
+                    userEmail = it.userEmail ?: "",
+                    signupAccessToken = it.signupAccessToken
+                ))
+        }
+    }
+    LaunchedEffect(key1 = Unit) {
         loginViewModel.goToHomeScreen.collectLatest {
             navController.navigate(Screens.Home)
             //navController.navigate(Screens.SelectTendency1)
         }
     }
+
+    val accessToken by loginViewModel.accessToken.collectAsStateWithLifecycle()
+
+    println("accessToken11 $accessToken")
 
     LoginScreen(
         onGoogleLoginSuccess = { token ->

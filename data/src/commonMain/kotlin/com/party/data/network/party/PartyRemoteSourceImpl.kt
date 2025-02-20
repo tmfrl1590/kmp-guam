@@ -3,6 +3,7 @@ package com.party.data.network.party
 import com.party.core.Constants.serverUrl
 import com.party.core.data.safeCall
 import com.party.core.domain.DataError
+import com.party.core.domain.DataErrorRemote
 import com.party.core.domain.Result
 import com.party.data.dto.party.PartyListDto
 import com.party.data.dto.party.RecruitmentListDto
@@ -21,8 +22,8 @@ class PartyRemoteSourceImpl(
         titleSearch: String?,
         partyTypes: List<Int>,
         position: List<Int>,
-    ): Result<RecruitmentListDto, DataError.Remote> {
-        return safeCall<RecruitmentListDto> {
+    ): Result<RecruitmentListDto, DataErrorRemote<Unit>> {
+        return safeCall<RecruitmentListDto, Unit> {
             httpClient.get(
                 urlString = serverUrl("/parties/recruitments")
             ){
@@ -49,8 +50,8 @@ class PartyRemoteSourceImpl(
         partyTypes: List<Int>,
         titleSearch: String?,
         status: String?,
-    ): Result<PartyListDto, DataError.Remote> {
-        return safeCall<PartyListDto> {
+    ): Result<PartyListDto, DataErrorRemote<Unit>> {
+        return safeCall<PartyListDto, Unit> {
             httpClient.get(
                 urlString = serverUrl("/parties")
             ){
