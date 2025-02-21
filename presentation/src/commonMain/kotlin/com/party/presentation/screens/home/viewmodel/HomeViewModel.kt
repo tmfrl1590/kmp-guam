@@ -7,6 +7,7 @@ import com.party.core.domain.onSuccess
 import com.party.domain.model.user.detail.PositionList
 import com.party.domain.usecase.party.GetPartyListUseCase
 import com.party.domain.usecase.party.GetRecruitmentListUseCase
+import com.party.domain.usecase.user.GetBannerListUseCase
 import com.party.domain.usecase.user.GetPositionsUseCase
 import com.party.presentation.enum.OrderDescType
 import com.party.presentation.enum.PartyType
@@ -23,10 +24,24 @@ class HomeViewModel(
     private val getPartyListUseCase: GetPartyListUseCase,
     private val getRecruitmentListUseCase: GetRecruitmentListUseCase,
     private val getPositionsUseCase: GetPositionsUseCase,
+    private val getBannerListUseCase: GetBannerListUseCase,
 ): ViewModel() {
 
     private val _state = MutableStateFlow(HomeState())
     val state = _state.asStateFlow()
+
+    init {
+        getBannerList()
+    }
+
+    private fun getBannerList() {
+        viewModelScope.launch(Dispatchers.IO) {
+            getBannerListUseCase()
+                .onSuccess { result ->
+                    _state.update { it.copy(banner = result) }
+                }
+        }
+    }
 
     fun getPartyList(
         page: Int,

@@ -2,6 +2,7 @@ package com.party.presentation.screens.home
 
 import com.party.core.presentation.bottomsheet.positionList
 import com.party.core.presentation.homeTopTabList
+import com.party.domain.model.Banner
 import com.party.domain.model.party.PartyList
 import com.party.domain.model.party.RecruitmentList
 import com.party.domain.model.user.detail.PositionList
@@ -14,6 +15,10 @@ data class HomeState(
 
     // 메인 / 파티 / 모집공고 탭
     val selectedTabText: String = homeTopTabList[0],
+
+    // Main Banner
+    val isLoadingBanner: Boolean = false,
+    val banner: Banner = Banner(0, emptyList()),
 
     // Main 모집공고
     val isLoadingRecruitmentList: Boolean = false,

@@ -26,6 +26,10 @@ fun MainArea(
             .fillMaxSize()
             .verticalScroll(scrollState)
     ) {
+        BannerArea(
+            homeState = homeState,
+        )
+
         HeightSpacer(heightDp = 60.dp)
 
         NewRecruitmentArea(
