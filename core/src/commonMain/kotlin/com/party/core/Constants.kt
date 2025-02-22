@@ -15,7 +15,7 @@ object Constants {
         return "$SERVER_URL$urlString"
     }
 
-    fun imageUrl(imageUrl: String?): String {
+    fun convertToImageUrl(imageUrl: String?): String {
         return IMAGE_URL + imageUrl
     }
 }

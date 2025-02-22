@@ -1,5 +1,6 @@
 package com.party.data.repository
 
+import com.party.core.Constants.convertToImageUrl
 import com.party.core.domain.DataErrorRemote
 import com.party.core.domain.Result
 import com.party.core.domain.map
@@ -25,7 +26,7 @@ class BannerRepositoryImpl(
                             id = item.id,
                             platform = item.platform,
                             title = item.title,
-                            image = item.image,
+                            image = convertToImageUrl(item.image),
                             link = item.link
                         )
                     }
