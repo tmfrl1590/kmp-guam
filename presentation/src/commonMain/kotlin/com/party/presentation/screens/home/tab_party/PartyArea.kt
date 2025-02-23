@@ -59,7 +59,7 @@ fun PartyArea(
 
     if(homeState.isPartyTypeSheetOpen){
         PartyTypeModal(
-            titleText = stringResource(Resources.String.Recruitment_filter2),
+            titleText = stringResource(Resources.String.Recruitment_Filter2),
             selectedPartyType = homeState.selectedPartyTypeListParty,
             onClick = onSelectPartyType,
             onModelClose = { onPartyTypeModal(false)},

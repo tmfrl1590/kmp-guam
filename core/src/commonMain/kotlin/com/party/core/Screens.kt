@@ -13,4 +13,6 @@ sealed interface Screens {
     data object Profile: Screens
     @Serializable
     data class JoinEmail(val userEmail: String, val signupAccessToken: String): Screens
+    @Serializable
+    data object Search: Screens
 }

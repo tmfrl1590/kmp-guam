@@ -9,6 +9,7 @@ import kmp_guam.core.generated.resources.home_list_new_title
 import kmp_guam.core.generated.resources.home_list_party_description
 import kmp_guam.core.generated.resources.home_list_party_title
 import kmp_guam.core.generated.resources.icon_alarm
+import kmp_guam.core.generated.resources.icon_arrow_back
 import kmp_guam.core.generated.resources.icon_arrow_down
 import kmp_guam.core.generated.resources.icon_arrow_right
 import kmp_guam.core.generated.resources.icon_checked
@@ -45,7 +46,6 @@ object Resources {
         val Home_List_New_Title= Res.string.home_list_new_title
         val Home_List_New_Description = Res.string.home_list_new_description
         val Filter1 = Res.string.filter1
-        val Recruitment_filter2 = Res.string.recruitment_filter2
         val Recruitment_Modal1 = Res.string.recruitment_modal1
         val Recruitment_Modal2 = Res.string.recruitment_modal2
         val Recruitment_Filter1 = Res.string.recruitment_filter1
@@ -63,6 +63,7 @@ object Resources {
         val Icon_Search = Res.drawable.icon_search
         val Icon_Alarm = Res.drawable.icon_alarm
         val Icon_Arrow_Right = Res.drawable.icon_arrow_right
+        val Icon_Arrow_Back = Res.drawable.icon_arrow_back
         val Icon_Arrow_Down = Res.drawable.icon_arrow_down
         val Icon_Toggle_On = Res.drawable.icon_toggle_on
         val Icon_Toggle_Off = Res.drawable.icon_toggle_off

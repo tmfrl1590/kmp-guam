@@ -14,6 +14,7 @@ import com.party.core.Screens
 import com.party.presentation.screens.home.HomeScreenRoute
 import com.party.presentation.screens.login.LoginScreenRoute
 import com.party.presentation.screens.profile.ProfileScreenRoute
+import com.party.presentation.screens.search.SearchRoute
 import com.party.presentation.screens.state.StateScreenRoute
 
 const val ANIMATION_DURATION = 500
@@ -73,6 +74,11 @@ fun AppNavHost() {
         composable<Screens.Profile> {
             ProfileScreenRoute(
                 navController = navController
+            )
+        }
+        composable<Screens.Search> {
+            SearchRoute(
+                navController = navController,
             )
         }
     }

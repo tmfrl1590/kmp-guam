@@ -165,7 +165,7 @@ private val NavController.shouldShowBottomBar
         Screens.Home,
         Screens.State,
         Screens.Profile,
-        //Screens.Search,
+        Screens.Search,
         //Screens.PartyDetail(partyId = 0),
         //Screens.RecruitmentDetail(partyRecruitmentId = 0, partyId = 0)
         -> true
@@ -199,7 +199,7 @@ fun NavBackStackEntry?.fromBottomRoute(): Screens? {
             Screens.Home::class.simpleName -> Screens.Home
             Screens.State::class.simpleName -> Screens.State
             Screens.Profile::class.simpleName -> Screens.Profile
-            //Screens.Search::class.simpleName -> Screens.Search
+            Screens.Search::class.simpleName -> Screens.Search
             //Screens.PartyDetail::class.simpleName -> Screens.PartyDetail(partyId = 0)
             //Screens.RecruitmentDetail::class.simpleName -> Screens.RecruitmentDetail(partyId = 0, partyRecruitmentId = 0)
             else -> null

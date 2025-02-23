@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
+import com.party.core.Screens
 import com.party.core.presentation.BottomNavigationBar
 import com.party.core.presentation.WHITE
 import com.party.core.presentation.homeTopTabList
@@ -48,7 +49,7 @@ fun HomeScreenRoute(
         navController = navController,
         listState = listState,
         gridState = gridState,
-        onGotoSearch = {},
+        onGotoSearch = { navController.navigate(Screens.Search) },
         onGotoRecruitmentDetail = { _, _ ->},
         onGotoPartyDetail = {},
         onAction = { action ->
